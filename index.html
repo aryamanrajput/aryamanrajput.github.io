@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryaman Rajput | DevOps Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        header p {
+            margin-top: 15px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            width: 60%;
+            height: 3px;
+            background: #38bdf8;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .contact-links a {
+            display: inline-block;
+            margin-right: 15px;
+            margin-top: 10px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: white;
+            text-decoration: none;
+            transition: 0.3s ease;
+            font-size: 14px;
+        }
+
+        .contact-links a:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #0f172a;
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Aryaman Rajput</h1>
+    <p>DevOps Enthusiast | AWS | Docker | Kubernetes | Terraform</p>
+</header>
+
+<section>
+    <h2>About Me</h2>
+    <div class="card">
+        <p>
+            DevOps learner focused on cloud infrastructure, automation, and containerized deployments.
+            Actively building real-world projects using AWS, Docker, CI/CD, and Infrastructure as Code.
+        </p>
+    </div>
+
+    <h2>Technical Skills</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>AWS</h3>
+            <ul>
+                <li>EC2, S3, IAM, VPC</li>
+                <li>ALB, Auto Scaling</li>
+                <li>CloudWatch, Route 53</li>
+                <li>ECS, ECR, Lambda</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>DevOps Tools</h3>
+            <ul>
+                <li>Git & GitHub</li>
+                <li>Docker</li>
+                <li>Jenkins & GitHub Actions</li>
+                <li>Kubernetes</li>
+                <li>Terraform</li>
+                <li>Linux & Bash</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Programming</h3>
+            <ul>
+                <li>Python</li>
+                <li>YAML & JSON</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Projects</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>CI/CD Pipeline</h3>
+            <p>Automated build and deployment of Dockerized app to AWS EC2 using GitHub Actions & Jenkins.</p>
+        </div>
+
+        <div class="card">
+            <h3>Terraform Infrastructure</h3>
+            <p>Provisioned AWS VPC, EC2, Security Groups using modular Terraform configuration.</p>
+        </div>
+
+        <div class="card">
+            <h3>Kubernetes Deployment</h3>
+            <p>Deployed scalable multi-tier app with rolling updates and replica management.</p>
+        </div>
+    </div>
+
+    <h2>Contact</h2>
+    <div class="card contact-links">
+        <a href="https://www.linkedin.com/in/aryaman-pal-a9963123a/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/aryaman151997" target="_blank">GitHub</a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Aryaman Rajput | DevOps Portfolio
+</footer>
+
+</body>
+</html>
