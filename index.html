@@ -1,227 +1,790 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryaman Pal | DevOps Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryaman Pal | QA Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    :root {
+      --bg:       #0d0f0e;
+      --bg2:      #131614;
+      --bg3:      #1a1e1b;
+      --border:   #252b26;
+      --green:    #3dffa0;
+      --green2:   #1aff80;
+      --muted:    #8a9a8d;
+      --text:     #d4e0d6;
+      --white:    #eef4ef;
+      --mono:     'DM Mono', monospace;
+      --sans:     'Syne', sans-serif;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    html { scroll-behavior: smooth; }
 
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            color: #f8fafc;
-            line-height: 1.6;
-        }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        header {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            animation: fadeIn 1.2s ease-in-out;
-        }
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
 
-        header h1 {
-            font-size: 42px;
-            font-weight: 700;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(13,15,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        header p {
-            margin-top: 15px;
-            font-size: 18px;
-            opacity: 0.9;
-        }
+    .nav-logo {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--green); }
 
-        section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 50px 20px;
-        }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
 
-        h2 {
-            font-size: 28px;
-            margin-bottom: 25px;
-            position: relative;
-            display: inline-block;
-        }
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        h2::after {
-            content: '';
-            width: 60%;
-            height: 3px;
-            background: #38bdf8;
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-        }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(61,255,160,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,255,160,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
+    .hero-glow {
+      position: absolute;
+      top: -120px; right: -160px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,255,160,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            animation: slideUp 0.8s ease forwards;
-        }
+    .hero-content {
+      position: relative;
+      max-width: 860px;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61,255,160,0.08);
+      border: 1px solid rgba(61,255,160,0.25);
+      border-radius: 4px;
+      padding: 5px 14px;
+      font-size: 12px;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before {
+      content: '●';
+      font-size: 8px;
+      animation: blink 1.4s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-        ul {
-            padding-left: 18px;
-            margin-top: 10px;
-        }
+    h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 1.0;
+      color: var(--white);
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 .accent { color: var(--green); }
 
-        li {
-            margin-bottom: 8px;
-        }
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 20px 0 40px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
 
-        .contact-links a {
-            display: inline-block;
-            margin-right: 15px;
-            margin-top: 10px;
-            padding: 10px 18px;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #38bdf8, #6366f1);
-            color: white;
-            text-decoration: none;
-            transition: 0.3s ease;
-            font-size: 14px;
-        }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .chip {
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .chip:hover { border-color: var(--green); color: var(--green); }
 
-        .contact-links a:hover {
-            transform: scale(1.05);
-        }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 13px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: #0d0f0e;
+      font-weight: 600;
+    }
+    .btn-primary:hover { background: var(--green2); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #0f172a;
-            margin-top: 40px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
+    .hero-meta {
+      position: absolute;
+      bottom: 40px; left: 48px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      display: flex;
+      gap: 24px;
+    }
+    .hero-meta span::before { content: '// '; color: var(--green); }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 30px;
-            }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-label::before { content: '— '; }
 
-            h2 {
-                font-size: 22px;
-            }
-        }
-    </style>
+    h2 {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 56px;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 36px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--green);
+    }
+    .exp-card:hover { border-color: rgba(61,255,160,0.3); }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .exp-role {
+      font-family: var(--sans);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .exp-company {
+      color: var(--green);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .exp-period {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .exp-bullets li {
+      padding-left: 20px;
+      position: relative;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 11px;
+      top: 3px;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); max-width: 100%; padding: 100px 0; }
+    #skills > .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px;
+      transition: all 0.25s;
+    }
+    .skill-block:hover {
+      border-color: rgba(61,255,160,0.3);
+      transform: translateY(-2px);
+    }
+
+    .skill-block-title {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .proj-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .proj-card:hover { border-color: rgba(61,255,160,0.25); transform: translateY(-2px); }
+    .proj-card:hover::after { transform: scaleX(1); }
+
+    .proj-num {
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      opacity: 0.6;
+    }
+    .proj-title {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .proj-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .proj-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      background: rgba(61,255,160,0.07);
+      border: 1px solid rgba(61,255,160,0.2);
+      color: var(--green);
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list { display: flex; flex-direction: column; gap: 16px; }
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .edu-degree { font-family: var(--sans); font-weight: 600; color: var(--white); font-size: 15px; }
+    .edu-school { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .edu-year { font-size: 12px; color: var(--green); }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+      background: var(--bg2);
+      max-width: 100%;
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+    }
+    #contact .inner { max-width: 600px; margin: 0 auto; }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px 48px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      #hero, section { padding-left: 24px; padding-right: 24px; }
+      #skills > .inner { padding: 0 24px; }
+      #contact { padding-left: 24px; padding-right: 24px; }
+      .hero-meta { left: 24px; bottom: 24px; flex-direction: column; gap: 6px; }
+      .exp-card { padding: 24px 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Aryaman Pal</h1>
-    <p>DevOps Enthusiast | AWS | Docker | Kubernetes | Terraform</p>
-</header>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Aryaman<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<section>
-    <h2>About Me</h2>
-    <div class="card">
-        <p>
-            DevOps learner focused on cloud infrastructure, automation, and containerized deployments.
-            Actively building real-world projects using AWS, Docker, CI/CD, and Infrastructure as Code.
-        </p>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">QA Engineer · Delhi NCR, India</div>
+      <h1>Aryaman<br/><span class="accent">Pal</span></h1>
+      <p class="hero-subtitle">
+        Detail-oriented QA Engineer skilled in manual testing, test case design, defect management, and API validation. Passionate about software quality and building reliable user experiences.
+      </p>
+      <div class="hero-chips">
+        <span class="chip">Manual Testing</span>
+        <span class="chip">JIRA</span>
+        <span class="chip">Postman</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">Regression Testing</span>
+        <span class="chip">Android Testing</span>
+        <span class="chip">SQL / MongoDB</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:aryamanrajput.01@gmail.com">Get in touch →</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/aryaman-pal-a9963123a" target="_blank">LinkedIn ↗</a>
+      </div>
     </div>
-
-    <h2>Technical Skills</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>AWS</h3>
-            <ul>
-                <li>EC2, S3, IAM, VPC</li>
-                <li>ALB, Auto Scaling</li>
-                <li>CloudWatch, Route 53</li>
-                <li>ECS, ECR, Lambda</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>DevOps Tools</h3>
-            <ul>
-                <li>Git & GitHub</li>
-                <li>Docker</li>
-                <li>Jenkins & GitHub Actions</li>
-                <li>Kubernetes</li>
-                <li>Terraform</li>
-                <li>Linux & Bash</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>Programming</h3>
-            <ul>
-                <li>Python</li>
-                <li>YAML & JSON</li>
-            </ul>
-        </div>
+    <div class="hero-meta">
+      <span>+91-7836073394</span>
+      <span>aryamanrajput.01@gmail.com</span>
     </div>
+  </section>
 
+  <hr class="divider" />
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Work History</p>
+    <h2>Experience</h2>
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">QA Engineer Intern</div>
+          <div class="exp-company">Cropbean · Bangalore</div>
+        </div>
+        <div class="exp-period">Oct 2024 – Mar 2025 · 6 months</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Manually tested the Cropbean Android application — a B2B coffee marketplace — covering buyer and seller flows end-to-end.</li>
+        <li>Designed and executed test cases for core buyer flows: posting coffee requirements, editing listings, managing active and closed requests, and verifying listing visibility.</li>
+        <li>Tested seller-side functionality: browsing buyer requirements, viewing detailed specs, unlocking contact details, and validating the deal initiation flow.</li>
+        <li>Verified that contact-detail access was correctly restricted to sellers who expressed interest; reported access control defects with detailed reproduction steps.</li>
+        <li>Performed functional, regression, and smoke testing across new builds; logged and tracked defects in JIRA with clear expected vs. actual results and severity ratings.</li>
+        <li>Conducted UI testing to validate form validations, input field behaviour, error messages, and screen navigation across buyer and seller roles.</li>
+        <li>Tested API responses for listing creation and contact-reveal actions using Postman, verifying status codes and response payloads.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="inner">
+      <p class="section-label">Capabilities</p>
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">Testing Types</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Manual Testing</span>
+            <span class="skill-tag">Functional Testing</span>
+            <span class="skill-tag">Regression Testing</span>
+            <span class="skill-tag">Smoke Testing</span>
+            <span class="skill-tag">Sanity Testing</span>
+            <span class="skill-tag">Black-box Testing</span>
+            <span class="skill-tag">UI Testing</span>
+          </div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">Test Artefacts</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Test Plans</span>
+            <span class="skill-tag">Test Scenarios</span>
+            <span class="skill-tag">Test Cases</span>
+            <span class="skill-tag">Bug Reports</span>
+            <span class="skill-tag">Traceability Matrix</span>
+          </div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">Defect Tracking</div>
+          <div class="skill-tags">
+            <span class="skill-tag">JIRA</span>
+            <span class="skill-tag">Defect Lifecycle</span>
+            <span class="skill-tag">Ticket Creation</span>
+            <span class="skill-tag">Severity & Priority</span>
+          </div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">API Testing</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">GET / POST / PUT / DELETE</span>
+            <span class="skill-tag">HTTP Status Codes</span>
+          </div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">Mobile & Web</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Android Testing</span>
+            <span class="skill-tag">Role-based Flow Validation</span>
+            <span class="skill-tag">HTTP/HTTPS</span>
+            <span class="skill-tag">DNS</span>
+            <span class="skill-tag">Load Balancing</span>
+          </div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-title">Database & Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">Linux (Ubuntu)</span>
+            <span class="skill-tag">Windows</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Work Samples</p>
     <h2>Projects</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>CI/CD Pipeline</h3>
-            <p>Automated build and deployment of Dockerized app to AWS EC2 using GitHub Actions & Jenkins.</p>
-        </div>
+    <div class="projects-grid">
 
-        <div class="card">
-            <h3>Terraform Infrastructure</h3>
-            <p>Provisioned AWS VPC, EC2, Security Groups using modular Terraform configuration.</p>
+      <div class="proj-card reveal">
+        <div class="proj-num">01</div>
+        <div class="proj-title">Web Application Testing — End-to-End Manual Testing</div>
+        <div class="proj-desc">
+          Designed and executed manual test cases covering functional, regression, and UI scenarios for a 3-tier web application. Validated data flow across frontend, backend, and database by verifying API behaviour and DB state after key user actions.
         </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Manual Testing</span>
+          <span class="proj-tag">Regression</span>
+          <span class="proj-tag">UI Testing</span>
+          <span class="proj-tag">3-Tier App</span>
+        </div>
+      </div>
 
-        <div class="card">
-            <h3>Kubernetes Deployment</h3>
-            <p>Deployed scalable multi-tier app with rolling updates and replica management.</p>
+      <div class="proj-card reveal">
+        <div class="proj-num">02</div>
+        <div class="proj-title">API Testing — REST API Validation</div>
+        <div class="proj-desc">
+          Tested REST APIs by validating endpoint responses, HTTP status codes, request payloads, and error handling across positive, negative, and boundary value scenarios. Verified authentication, authorisation, and data integrity checks.
         </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Postman</span>
+          <span class="proj-tag">REST API</span>
+          <span class="proj-tag">Boundary Testing</span>
+          <span class="proj-tag">Auth Validation</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-num">03</div>
+        <div class="proj-title">Monitoring Dashboard — Observability & Defect Detection</div>
+        <div class="proj-desc">
+          Validated metric dashboards for accuracy of CPU, memory, and application health data under varying load conditions. Identified anomalies by correlating data from multiple monitoring sources and verified alerting rules against threshold conditions.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Observability</span>
+          <span class="proj-tag">Alert Testing</span>
+          <span class="proj-tag">Defect Detection</span>
+          <span class="proj-tag">Load Conditions</span>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-    <h2>Contact</h2>
-    <div class="card contact-links">
-        <a href="https://www.linkedin.com/in/aryaman-pal-a9963123a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/aryaman151997" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <hr class="divider" />
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Academic Background</p>
+    <h2>Education</h2>
+    <div class="edu-list reveal">
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+          <div class="edu-school">MDU, Rohtak</div>
+        </div>
+        <div class="edu-year">Aug 2016 – Aug 2020</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Class XII — CBSE Board</div>
+          <div class="edu-school">Senior Secondary School</div>
+        </div>
+        <div class="edu-year">Apr 2015 – Mar 2016</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Class X — CBSE Board</div>
+          <div class="edu-school">Secondary School</div>
+        </div>
+        <div class="edu-year">Apr 2013 – Mar 2014</div>
+      </div>
     </div>
-</section>
+  </section>
 
-<footer>
-    © 2026 Aryaman Pal | DevOps Portfolio
-</footer>
+  <hr class="divider" />
 
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="inner">
+      <p class="section-label">Get In Touch</p>
+      <h2>Contact</h2>
+      <p style="color:var(--muted);font-size:14px;">
+        Open to QA Engineer roles and collaborations. Feel free to reach out.
+      </p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:aryamanrajput.01@gmail.com">
+          ✉ aryamanrajput.01@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+917836073394">
+          ☎ +91-7836073394
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/aryaman-pal-a9963123a" target="_blank">
+          ↗ LinkedIn
+        </a>
+        <a class="contact-link" href="https://github.com/aryaman151997" target="_blank">
+          ↗ GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Aryaman Pal &nbsp;·&nbsp; QA Engineer &nbsp;·&nbsp; Delhi NCR, India
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
-
